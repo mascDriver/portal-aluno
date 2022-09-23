@@ -2,15 +2,18 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 import base64 from 'react-native-base64'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 export default function SignIn() {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setLoading] = React.useState(false);
+  const navigation = useNavigation()
 
   const getSession = async () => {
     setLoading(true);
-    const encoded =base64.encode(username + ":" + password);
+    const encoded = base64.encode(username + ":" + password);
     try {
       const response = await fetch('https://api-portal-aluno.mascdriver.com.br/login', {
         method: 'POST',
@@ -19,12 +22,18 @@ export default function SignIn() {
           'Authorization': `Basic ${encoded}`
         }
       });
-      const json = await response.json();
-      console.error(json);
+      const json = await response.json(); 
+      try {
+        await AsyncStorage.setItem('session', json.session)
+        navigation.navigate('Home')
+      } catch (error) {
+        console.error(error);
+      }
     } catch (error) {
       console.error(error);
       setLoading(false);
     } finally {
+      setLoading(false);
     }
   }
   return (
@@ -36,16 +45,16 @@ export default function SignIn() {
       <Animatable.View animation='fadeInUp' style={styles.containerForm}>
         <Text style={styles.title}>Username</Text>
         <TextInput
-          onChangeText={text => setUsername(text)} placeholder='IdUFFS ou CPF' style={styles.input}/>
+          onChangeText={text => setUsername(text)} placeholder='IdUFFS ou CPF' style={styles.input} autoCapitalize='none'/>
 
 
         <Text style={styles.title}>Senha</Text>
         <TextInput
-          onChangeText={text => setPassword(text)} placeholder='Senha' style={styles.input} secureTextEntry={true}/>
+          onChangeText={text => setPassword(text)} placeholder='Senha' style={styles.input} secureTextEntry={true} />
 
-        <TouchableOpacity style={styles.button} onPress={getSession}>
+        <TouchableOpacity style={isLoading ? styles.buttonLoading : styles.button} onPress={getSession} disabled={isLoading}>
           <Text style={styles.buttonText}>
-            {isLoading? 'Efetuando Login': 'Acessar'}
+            {isLoading ? 'Efetuando Login. Por favor, aguarde.' : 'Acessar'}
           </Text>
         </TouchableOpacity>
 
@@ -89,6 +98,15 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#006d40',
+    width: '100%',
+    borderRadius: 4,
+    paddingVertical: 8,
+    marginTop: 14,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonLoading: {
+    backgroundColor: '#a1a1a1',
     width: '100%',
     borderRadius: 4,
     paddingVertical: 8,

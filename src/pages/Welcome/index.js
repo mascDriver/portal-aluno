@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable'
-import { useNavigation
- } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function Welcome() {
     const navigation = useNavigation()
+
     return (
         <View style={styles.container}>
             <View style={styles.containerLogo}>
@@ -21,7 +23,7 @@ export default function Welcome() {
             >
                 <Text style={styles.title}>Portal do Aluno UFFS.</Text>
                 <Text style={styles.text}>Faça o login para começar</Text>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SignIn')}>
+                <TouchableOpacity style={styles.button} onPress={async () => await AsyncStorage.getItem('session') ? navigation.navigate('Home') : navigation.navigate('SignIn')}>
                     <Text style={styles.buttonText}>Acessar</Text>
                 </TouchableOpacity>
             </Animatable.View>
