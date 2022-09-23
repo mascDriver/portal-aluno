@@ -2,17 +2,20 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 
-export default function Ccr({ data }) {
+export default function NotasMatriz({ data }) {
     return (
-        <Animatable.View 
-        style={styles.container}
-        animation='fadeInUp'
-        delay={600}
+        <Animatable.View
+            style={styles.container}
+            animation='fadeInUp'
+            delay={600}
         >
-        <Text  style={styles.label}>{data.ccr}</Text>
             <View style={styles.content}>
-                <Text style={styles.value}>Média: {data.media_final}</Text>
-                <Text style={styles.value}>{data.frequencia}</Text>
+                <Text style={styles.label}>{data.ccr}</Text>
+                <Text>Fase: {data.fase}</Text>
+            </View>
+            <View style={styles.content}>
+                <Text style={styles.value}>Média: {data.notafinal}</Text>
+                {data.frequencia ? <Text style={styles.value}>Frequência: {data.frequencia}</Text>: <Text></Text>}
             </View>
         </Animatable.View>
     );

@@ -24,7 +24,9 @@ export default function SignIn() {
       });
       const json = await response.json(); 
       try {
+        console.log(json)
         await AsyncStorage.setItem('session', json.session)
+        await AsyncStorage.setItem('name', json.name)
         navigation.navigate('Home')
       } catch (error) {
         console.error(error);
