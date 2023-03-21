@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     list: {
         marginStart: 14,
         marginEnd: 14,
+        marginBottom: 50,
         paddingStart: 25,
     },
     activityIndicator: {

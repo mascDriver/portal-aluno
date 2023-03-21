@@ -15,10 +15,10 @@ export default function Home() {
   const [refreshing, setRefreshing] = React.useState(true);
   const navigation = useNavigation()
 
-  const getNameUser = async () =>{
+  const getNameUser = async () => {
     const name = await AsyncStorage.getItem('name')
     setName(name.split(' ')[0])
-}
+  }
 
   const getNotasSemestre = async () => {
     setRefreshing(true)
@@ -41,17 +41,20 @@ export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentHeader}>
-        <Header name={nameUser}/>
+        <Header name={nameUser} />
       </View>
 
       <Text style={styles.titlePage}>Notas do semestre</Text>
       <View style={styles.content}>
-        {refreshing ? <ActivityIndicator size={75} style={styles.activityIndicator} color="#000000" /> :
-          <FlatList style={styles.list} data={notas} keyExtractor={(item) => String(item.id)}
-            showsVerticalScrollIndicator={false} renderItem={({ item }) => <Ccr data={item} />}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={getNotasSemestre} style={styles.list} />
-            } />
+        {
+          refreshing ?
+            <ActivityIndicator size={75} style={styles.activityIndicator} color="#000000" />
+            :
+            <FlatList style={styles.list} data={notas} keyExtractor={(item) => String(item.id)}
+              showsVerticalScrollIndicator={false} renderItem={({ item }) => <Ccr data={item} navigation={navigation}/>}
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={getNotasSemestre} style={styles.list} />
+              } />
         }
       </View>
     </SafeAreaView>
@@ -77,6 +80,7 @@ const styles = StyleSheet.create({
   list: {
     marginStart: 14,
     marginEnd: 14,
+    marginBottom: 50,
     paddingStart: 25,
   },
   activityIndicator: {

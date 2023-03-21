@@ -1,18 +1,34 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Ccr({ data }) {
+export default function Ccr({ data, navigation }) {
+    const [notas, setNotas] = React.useState([])
+    const getNotasSemestreDetalhada = async (cc_id) => {
+        console.log(cc_id)
+        const session = await AsyncStorage.getItem('session')
+        const response = await fetch(`http://192.168.2.107:8000/notas_semestre/${cc_id}/detalhada/${session}`)
+        const json = await response.json()
+
+        setNotas(json);
+        console.log(notas)
+    }
     return (
-        <Animatable.View 
-        style={styles.container}
-        animation='fadeInUp'
-        delay={600}
+        <Animatable.View
+            style={styles.container}
+            animation='fadeInUp'
+            delay={600}
         >
-        <Text  style={styles.label}>{data.ccr}</Text>
+            <Text style={styles.label}>{data.ccr}</Text>
             <View style={styles.content}>
                 <Text style={styles.value}>Média: {data.media_final}</Text>
                 <Text style={styles.value}>{data.frequencia}</Text>
+            </View>
+            <View style={styles.content}>
+                <TouchableOpacity onPress={async () => getNotasSemestreDetalhada(data.id)}>
+                    <Text style={styles.value}>Notas:</Text>
+                </TouchableOpacity>
             </View>
         </Animatable.View>
     );
