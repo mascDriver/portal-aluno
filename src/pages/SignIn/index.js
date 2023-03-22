@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator, Anchor } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 import base64 from 'react-native-base64'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { postLogin } from '../../services/Aluno/Post';
+import { A } from '@expo/html-elements';
 
 export default function SignIn() {
   const [username, setUsername] = React.useState('');
@@ -15,13 +17,7 @@ export default function SignIn() {
     setLoading(true);
     const encoded = base64.encode(username + ":" + password);
     try {
-      const response = await fetch('http://192.168.2.107:8000/login', {
-        method: 'POST',
-        headers: {
-          'accept': 'application/json',
-          'Authorization': `Basic ${encoded}`
-        }
-      });
+      const response = await postLogin(encoded)
       const json = await response.json();
       try {
         console.log(json)
@@ -61,6 +57,9 @@ export default function SignIn() {
             </Text>
           }
         </TouchableOpacity>
+        <Text style={styles.textTerms}>
+          Ao logar, você concorda com os <A style={styles.textLinkTerms} href="https://mascdriver.github.io/portal-aluno/terms_and_conditions.md">termos e condições</A>  para o uso do aplicativo.
+        </Text>
 
       </Animatable.View>
 
@@ -70,7 +69,7 @@ export default function SignIn() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#006d40'
+    backgroundColor: '#00693E'
   },
   containerHeader: {
     marginTop: '14%',
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   button: {
-    backgroundColor: '#006d40',
+    backgroundColor: '#00693E',
     width: '100%',
     borderRadius: 4,
     paddingVertical: 8,
@@ -120,5 +119,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold'
+  },
+  textLinkTerms: {
+    textDecorationLine: 'underline',
+    color: 'blue'
+  },
+  textTerms:{
+    marginTop: 10
   }
 })

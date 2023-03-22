@@ -7,7 +7,7 @@
   --md-ref-palette-primary25: #004527;
   --md-ref-palette-primary30: #00522f;
   --md-ref-palette-primary35: #005f38;
-  --md-ref-palette-primary40: #006d40;
+  --md-ref-palette-primary40: #00693E;
   --md-ref-palette-primary50: #1d8855;
   --md-ref-palette-primary60: #3fa26d;
   --md-ref-palette-primary70: #5cbe86;
@@ -103,7 +103,7 @@
   --md-ref-palette-error99: #fffbff;
   --md-ref-palette-error100: #ffffff;
   /* light */
-  --md-sys-color-primary-light: #006d40;
+  --md-sys-color-primary-light: #00693E;
   --md-sys-color-on-primary-light: #ffffff;
   --md-sys-color-primary-container-light: #94f7ba;
   --md-sys-color-on-primary-container-light: #002110;
@@ -130,8 +130,8 @@
   --md-sys-color-inverse-surface-light: #2e312e;
   --md-sys-color-inverse-primary-light: #78da9f;
   --md-sys-color-shadow-light: #000000;
-  --md-sys-color-surface-tint-light: #006d40;
-  --md-sys-color-surface-tint-color-light: #006d40;
+  --md-sys-color-surface-tint-light: #00693E;
+  --md-sys-color-surface-tint-color-light: #00693E;
   /* dark */
   --md-sys-color-primary-dark: #78da9f;
   --md-sys-color-on-primary-dark: #00391f;
@@ -158,7 +158,7 @@
   --md-sys-color-outline-dark: #8a938b;
   --md-sys-color-inverse-on-surface-dark: #191c1a;
   --md-sys-color-inverse-surface-dark: #e1e3de;
-  --md-sys-color-inverse-primary-dark: #006d40;
+  --md-sys-color-inverse-primary-dark: #00693E;
   --md-sys-color-shadow-dark: #000000;
   --md-sys-color-surface-tint-dark: #78da9f;
   --md-sys-color-surface-tint-color-dark: #78da9f;

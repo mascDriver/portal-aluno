@@ -4,21 +4,20 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Avaliacoes from '../Avaliacoes';
+import { getApiAvaliacoesCcrSemestreDetalhada } from '../../services/Aluno/Get';
 
 export default function Ccr({ data, navigation }) {
     const [notas, setNotas] = React.useState([])
     const [press, setPress] = React.useState(false)
     const [loading, setLoading] = React.useState(false);
     const getNotasSemestreDetalhada = async (cc_id) => {
-        console.log(cc_id)
         setLoading(true)
         const session = await AsyncStorage.getItem('session')
-        const response = await fetch(`http://192.168.2.107:8000/notas_semestre/${cc_id}/detalhada/${session}`)
+        const response = await getApiAvaliacoesCcrSemestreDetalhada(cc_id)
         const json = await response.json()
 
         setNotas(json);
         setLoading(false)
-        console.log(notas)
     }
     return (
         <Pressable onPress={() => setPress(!press)}>

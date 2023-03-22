@@ -15,7 +15,7 @@ export function RoutesBottom() {
         screenOptions={{
             tabBarShowLabel: false,
             tabBarStyle:{
-                backgroundColor: '#006d40',
+                backgroundColor: '#00693E',
             }
         }}
         >
