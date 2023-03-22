@@ -58,7 +58,7 @@ export default function SignIn() {
           }
         </TouchableOpacity>
         <Text style={styles.textTerms}>
-          Ao logar, você concorda com os <A style={styles.textLinkTerms} href="https://mascdriver.github.io/portal-aluno/terms_and_conditions.md">termos e condições</A>  para o uso do aplicativo.
+          Ao logar, você concorda com os <A style={styles.textLinkTerms} href="https://mascdriver.github.io/portal-aluno/terms_and_conditions">termos e condições</A>  para o uso do aplicativo.
         </Text>
 
       </Animatable.View>
