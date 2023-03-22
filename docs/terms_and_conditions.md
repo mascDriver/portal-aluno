@@ -8,4 +8,4 @@ O desenvolvedor não garante a proteção ou confidencialidade de seus dados. Ao
 Ao clicar em "Acessar", você concorda em não responsabilizar o desenvolvedor por quaisquer problemas ou danos decorrentes do uso do aplicativo. Isso inclui, mas não se limita a, danos diretos ou indiretos, perda de dados, interrupção de serviços ou falhas de segurança.
 
 ### Alterações nos Termos e Condições
-O desenvolvedor se reserva o direito de alterar os termos e condições a qualquer momento, sem aviso prévio. Ao continuar a utilizar o aplicativo após tais alterações, você concorda em aceitar os novos termos e condições.
+O desenvolvedor se reserva o direito de alterar os termos e condições a qualquer momento, sem aviso prévio. Ao continuar a utilizar o aplicativo após tais alterações, você concorda em aceitar os novos termos e condições. 
