@@ -15,23 +15,24 @@ export default function Matriz() {
     const [refreshing, setRefreshing] = React.useState(true);
     const navigation = useNavigation()
 
-    const getNameUser = async () =>{
+    const getNameUser = async () => {
         const name = await AsyncStorage.getItem('name')
         setName(name.split(' ')[0])
     }
-    
+
     const getNotasMatriz = async () => {
         setRefreshing(true)
         const session = await AsyncStorage.getItem('session')
-        fetch(`https://api-portal-aluno.mascdriver.com.br/notas_matriz/${session}`)
-            .then((response) => response.json())
-            .then((json) => {
-                setNotas(json);
-                setRefreshing(false)
-            })
-            .catch((error) => {
-                AsyncStorage.removeItem('session').then(() => navigation.navigate('Welcome'))
-            });
+        const response = await fetch(`http://192.168.2.107:8000/notas_matriz/${session}`)
+        const json = await response.json()
+        if (response.ok) {
+            setNotas(json);
+            setRefreshing(false)
+        }
+        else {
+            console.log(json)
+            AsyncStorage.removeItem('session').then(() => navigation.navigate('Welcome'))
+        }
     }
 
     React.useEffect(() => {
@@ -76,10 +77,7 @@ const styles = StyleSheet.create({
 
     },
     list: {
-        marginStart: 14,
         marginEnd: 14,
-        marginBottom: 50,
-        paddingStart: 25,
     },
     activityIndicator: {
         flex: 1,

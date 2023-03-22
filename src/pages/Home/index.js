@@ -23,15 +23,16 @@ export default function Home() {
   const getNotasSemestre = async () => {
     setRefreshing(true)
     const session = await AsyncStorage.getItem('session')
-    fetch(`https://api-portal-aluno.mascdriver.com.br/notas_semestre/${session}`)
-      .then((response) => response.json())
-      .then((json) => {
-        setNotas(json);
-        setRefreshing(false)
-      })
-      .catch((error) => {
-        AsyncStorage.removeItem('session').then(() => navigation.navigate('Welcome'))
-      });
+    const response = await fetch(`http://192.168.2.107:8000/notas_semestre/${session}`)
+    const json = await response.json()
+    if (response.ok) {
+      setNotas(json);
+      setRefreshing(false)
+    }
+    else {
+      console.log(json)
+      AsyncStorage.removeItem('session').then(() => navigation.navigate('Welcome'))
+    }
   }
 
   React.useEffect(() => {
@@ -51,7 +52,7 @@ export default function Home() {
             <ActivityIndicator size={75} style={styles.activityIndicator} color="#000000" />
             :
             <FlatList style={styles.list} data={notas} keyExtractor={(item) => String(item.id)}
-              showsVerticalScrollIndicator={false} renderItem={({ item }) => <Ccr data={item} navigation={navigation}/>}
+              showsVerticalScrollIndicator={false} renderItem={({ item }) => <Ccr data={item} navigation={navigation} />}
               refreshControl={
                 <RefreshControl refreshing={refreshing} onRefresh={getNotasSemestre} style={styles.list} />
               } />
@@ -80,7 +81,6 @@ const styles = StyleSheet.create({
   list: {
     marginStart: 14,
     marginEnd: 14,
-    marginBottom: 80,
   },
   activityIndicator: {
     flex: 1,
@@ -98,6 +98,5 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
     paddingStart: '5%',
-    paddingEnd: '5%'
   }
 })

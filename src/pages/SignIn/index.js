@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 import base64 from 'react-native-base64'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -15,14 +15,14 @@ export default function SignIn() {
     setLoading(true);
     const encoded = base64.encode(username + ":" + password);
     try {
-      const response = await fetch('https://api-portal-aluno.mascdriver.com.br/login', {
+      const response = await fetch('http://192.168.2.107:8000/login', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
           'Authorization': `Basic ${encoded}`
         }
       });
-      const json = await response.json(); 
+      const json = await response.json();
       try {
         console.log(json)
         await AsyncStorage.setItem('session', json.session)
@@ -47,7 +47,7 @@ export default function SignIn() {
       <Animatable.View animation='fadeInUp' style={styles.containerForm}>
         <Text style={styles.title}>Username</Text>
         <TextInput
-          onChangeText={text => setUsername(text)} placeholder='IdUFFS ou CPF' style={styles.input} autoCapitalize='none'/>
+          onChangeText={text => setUsername(text)} placeholder='IdUFFS ou CPF' style={styles.input} autoCapitalize='none' />
 
 
         <Text style={styles.title}>Senha</Text>
@@ -55,9 +55,11 @@ export default function SignIn() {
           onChangeText={text => setPassword(text)} placeholder='Senha' style={styles.input} secureTextEntry={true} />
 
         <TouchableOpacity style={isLoading ? styles.buttonLoading : styles.button} onPress={getSession} disabled={isLoading}>
-          <Text style={styles.buttonText}>
-            {isLoading ? 'Efetuando Login. Por favor, aguarde.' : 'Acessar'}
-          </Text>
+          {isLoading ? <ActivityIndicator size={40} style={styles.activityIndicator} color="#000000" />
+            : <Text style={styles.buttonText}>
+              Acessar
+            </Text>
+          }
         </TouchableOpacity>
 
       </Animatable.View>
@@ -108,9 +110,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   buttonLoading: {
-    backgroundColor: '#a1a1a1',
     width: '100%',
-    borderRadius: 4,
     paddingVertical: 8,
     marginTop: 14,
     justifyContent: 'center',

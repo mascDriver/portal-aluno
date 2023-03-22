@@ -15,9 +15,7 @@ export function RoutesBottom() {
         screenOptions={{
             tabBarShowLabel: false,
             tabBarStyle:{
-                position: 'absolute',
                 backgroundColor: '#006d40',
-                elevation: 0,
             }
         }}
         >

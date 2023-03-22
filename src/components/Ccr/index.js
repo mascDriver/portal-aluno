@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ActivityIndicator, FlatList } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Avaliacoes from '../Avaliacoes';
@@ -20,28 +21,35 @@ export default function Ccr({ data, navigation }) {
         console.log(notas)
     }
     return (
-        <Animatable.View
-            style={styles.container}
-            animation='fadeInUp'
-            delay={600}
-        >
-            <Text style={styles.label}>{data.ccr}</Text>
-            <View style={styles.content}>
-                <Text style={styles.value}>Média: {data.media_final}</Text>
-                <Text style={styles.value}>{data.frequencia}</Text>
-            </View>
-            <View style={styles.content}>
-                <TouchableOpacity onPress={async () => getNotasSemestreDetalhada(data.id)}>
-                    <Text style={styles.value}>Notas:</Text>
-                    {loading ? <ActivityIndicator size={40} style={styles.activityIndicator} color="#000000" />
+        <Pressable onPress={() => setPress(!press)}>
+            <Animatable.View
+                style={styles.container}
+                animation='fadeInUp'
+                delay={600}
+            >
+                <Text style={styles.label}>{data.ccr}</Text>
+                <View style={styles.content}>
+                    <Text style={styles.value}>Média: {data.media_final}</Text>
+                    <Text style={styles.value}>{data.frequencia}</Text>
+                </View>
+                <View style={styles.contentNota}>
+                    <Pressable style={styles.buttonAvaliacoes} onPress={async () => {
+                        setPress(!press)
+                        getNotasSemestreDetalhada(data.id)
+                    }
+                    }>
+                        <Text style={styles.textAtualizarNotas}>{press ? 'Atualizar notas' :  'Visualizar Notas'}</Text>
+                        <MaterialIcons name={'update'} size={20} style={{ paddingRight: 20 }} color={'grey'} />
+                    </Pressable>
+                    {press ? (loading ? <ActivityIndicator size={40} style={styles.activityIndicator} color="#000000" />
                         :
                         <FlatList style={styles.list} data={notas} keyExtractor={(item) => String(item.id)}
-                            renderItem={({ item }) => <Avaliacoes data={item}/>}
-                        />
+                            renderItem={({ item }) => <Avaliacoes data={item} />}
+                        />) : <></>
                     }
-                </TouchableOpacity>
-            </View>
-        </Animatable.View>
+                </View>
+            </Animatable.View>
+        </Pressable>
     );
 }
 
@@ -66,4 +74,22 @@ const styles = StyleSheet.create({
         marginTop: 16,
         fontSize: 16,
     },
+    textAtualizarNotas:{
+        paddingRight: 5,
+        marginTop: 10,
+        fontSize: 16,
+        textDecorationLine: 'underline',
+    },
+    list: {
+        marginBottom: 15,
+        marginTop: 15,
+    },
+    buttonAvaliacoes: {
+        flexDirection: 'row',
+        flex: 1,
+        alignItems: 'flex-end',
+        marginBottom: 10,
+        paddingTop: 10,
+        paddingBottom: 10
+    }
 })
