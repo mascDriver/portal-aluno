@@ -8,8 +8,8 @@ jobs:
     steps:
       - name: Check for EXPO_TOKEN
         run: |
-          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
-            echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
+          if [ -z "${{ secrets.TOKEN_EXPO }}" ]; then
+            echo "You must provide an TOKEN_EXPO secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
             exit 1
           fi
 
@@ -26,7 +26,7 @@ jobs:
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+          token: ${{ secrets.TOKEN_EXPO }}
 
       - name: Install dependencies
         run: yarn install
