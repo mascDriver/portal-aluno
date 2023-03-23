@@ -1,8 +1,6 @@
-import { API_URL } from "@env"
-
 
 export const postLogin = async (encoded) => {
-    return fetch(`${API_URL}/login`, {
+    return fetch(`${process.env.API_URL}/login`, {
         method: 'POST',
         headers: {
             'accept': 'application/json',

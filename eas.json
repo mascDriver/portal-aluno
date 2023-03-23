@@ -5,14 +5,24 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "API_URL": "https://api-portal-aluno.mascdriver.com.br/"
+      }
     },
     "preview": {
       "android": {
         "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
       }
     },
-    "production": {}
+    "production": {
+      "env": {
+        "API_URL": "https://api-portal-aluno.mascdriver.com.br/"
+      }
+    }
   },
   "submit": {
     "production": {}
