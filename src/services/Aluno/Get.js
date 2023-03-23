@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 export const getApiNotasSemestre = async () => {
     return fetch(`${process.env.API_URL}/notas_semestre/${await AsyncStorage.getItem('session')}`)
 }

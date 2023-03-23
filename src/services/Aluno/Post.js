@@ -1,3 +1,4 @@
+import { Constants } from "expo-constants"
 
 export const postLogin = async (encoded) => {
     return fetch(`${process.env.API_URL}/login`, {
