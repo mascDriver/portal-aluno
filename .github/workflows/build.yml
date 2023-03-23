@@ -3,24 +3,28 @@ on:
     branches:
       - master
 jobs:
-  Build-for-android:
-    runs-on: macos-latest
+  update:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v3
+
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18.x
-      - uses: actions/setup-java@v1.4.3
+          cache: yarn
+
+      - name: 🏗 Setup EAS
+        uses: expo/expo-github-action@v8
         with:
-          java-version: '9.0.4' # The JDK version to make available on the path.
-          java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
-          architecture: x64 # (x64 or x86) - defaults to x64
-      - uses: expo/expo-github-action@v5
-        with:
-          expo-version: 3.x
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
-      - name: Install deps
+
+      - name: 📦 Install dependencies
         run: yarn install
-      - name: Build Android APK Bundle
-        run: expo build:android
+
+      - name: 🚀 Create update
+        run: eas update --auto --non-interactive
