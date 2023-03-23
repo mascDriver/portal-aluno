@@ -33,7 +33,7 @@ export default function Ccr({ data, navigation }) {
                 </View>
                 <View style={styles.contentNota}>
                     <Pressable style={styles.buttonAvaliacoes} onPress={async () => {
-                        setPress(!press)
+                        setPress(true)
                         getNotasSemestreDetalhada(data.id)
                     }
                     }>

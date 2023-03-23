@@ -8,6 +8,7 @@ import NotasMatriz from '../../components/NotasMatriz';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { getApiNotasMatriz } from '../../services/Aluno/Get';
+import Toast from 'react-native-toast-message';
 
 
 export default function Matriz() {
@@ -32,6 +33,11 @@ export default function Matriz() {
         }
         else {
             console.log(json)
+            Toast.show({
+              type: 'error',
+              text1: 'Sessão expirada!',
+              text2: 'Por favor, efetue o login novamente.'
+            });
             AsyncStorage.removeItem('session').then(() => navigation.navigate('Welcome'))
         }
     }
