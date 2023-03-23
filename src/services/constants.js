@@ -1,0 +1,1 @@
+export const API_URL = "https://api-portal-aluno.mascdriver.com.br/"

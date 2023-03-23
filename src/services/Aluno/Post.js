@@ -1,7 +1,8 @@
 import { Constants } from "expo-constants"
+import { API_URL } from "../constants"
 
 export const postLogin = async (encoded) => {
-    return fetch(`${process.env.API_URL}/login`, {
+    return fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: {
             'accept': 'application/json',
