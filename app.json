@@ -4,10 +4,10 @@
     "slug": "portal-aluno",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/ico-uffs.png",
+    "icon": "./assets/ico.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/logo.png",
+      "image": "./assets/splash/drawable-hdpi/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,7 +23,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/ico-uffs.png",
+        "foregroundImage": "./assets/ico.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.mascdriver.portalaluno"
@@ -33,8 +33,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d59c0b44-37cc-4caf-aae3-02a98e20ecc8",
-        "API_URL": "https://api-portal-aluno.mascdriver.com.br/"
+        "projectId": "d59c0b44-37cc-4caf-aae3-02a98e20ecc8"
       }
     }
   }

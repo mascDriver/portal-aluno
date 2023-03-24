@@ -1,4 +1,3 @@
-import { Constants } from "expo-constants"
 import { API_URL } from "../constants"
 
 export const postLogin = async (encoded) => {
