@@ -6,6 +6,12 @@ O Portal do Aluno Mobile é um projeto open source em React Native com Expo que 
 ## :iphone:	 O aplicativo está disponível em:
 [Versão BETA](https://github.com/mascDriver/portal-aluno/releases/tag/0.0.1).
 
+#### :coffee: Para me pagar um café :coffee:
+PIX :money_with_wings: :money_with_wings: :money_with_wings: : 
+```
+diogobaltazardonascimento@outlook.com
+```
+
 ### :rocket: Funcionalidades
 
 O Portal do Aluno Mobile oferece as seguintes funcionalidades:
