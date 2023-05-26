@@ -12,6 +12,8 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
+      "enabled": false,
+      "checkAutomatically": "ON_ERROR_RECOVERY",
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
@@ -35,6 +37,14 @@
       "eas": {
         "projectId": "d59c0b44-37cc-4caf-aae3-02a98e20ecc8"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-updates",
+        {
+          "username": "mascDriver"
+        }
+      ]
+    ]
   }
 }
