@@ -28,7 +28,8 @@
         "foregroundImage": "./assets/ico.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.mascdriver.portalaluno"
+      "package": "com.mascdriver.portalaluno",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/ico-uffs.png"
