@@ -8,7 +8,8 @@
       "distribution": "internal",
       "env": {
         "API_URL": "https://api-portal-aluno.mascdriver.com.br/"
-      }
+      },
+      "channel": "development"
     },
     "preview": {
       "android": {
@@ -16,12 +17,14 @@
       },
       "ios": {
         "simulator": true
-      }
+      },
+      "channel": "preview"
     },
     "production": {
       "env": {
         "API_URL": "https://api-portal-aluno.mascdriver.com.br/"
-      }
+      },
+      "channel": "production"
     }
   },
   "submit": {
