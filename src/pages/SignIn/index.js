@@ -14,16 +14,21 @@ export default function SignIn() {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setLoading] = React.useState(false);
-  const [isChecked, setChecked] = React.useState(false);
+  const [isChecked, setChecked] = React.useState(true);
   const [secureTextEntry, setSecureTextEntry] = React.useState(true);
   const navigation = useNavigation()
 
   React.useEffect(() => {
-    async function getUsername() {
-      setUsername(await AsyncStorage.getItem('username'))
-    }
     getUsername()
+    getPassword()
   }, [])
+
+  async function getUsername() {
+    setUsername(await AsyncStorage.getItem('username'))
+  }
+  async function getPassword() {
+    setPassword(await AsyncStorage.getItem('password'))
+  }
 
   const getSession = async () => {
     if (!username) {
@@ -48,10 +53,14 @@ export default function SignIn() {
     if (response.ok) {
       await AsyncStorage.setItem('session', json.session)
       await AsyncStorage.setItem('name', json.name)
-      if (isChecked)
+      if (isChecked) {
         await AsyncStorage.setItem('username', username)
-      else
+        await AsyncStorage.setItem('password', password)
+      }
+      else {
         await AsyncStorage.removeItem('username')
+        await AsyncStorage.removeItem('password')
+      }
       navigation.navigate('Home')
     } else {
       Toast.show({
@@ -76,7 +85,7 @@ export default function SignIn() {
         <Text style={styles.title}>Senha</Text>
         <View style={styles.inputPassword}>
           <TextInput
-            onChangeText={text => setPassword(text)} placeholder='Senha' style={styles.input} secureTextEntry={secureTextEntry} ico />
+            onChangeText={text => setPassword(text)} defaultValue={password} placeholder='Senha' style={styles.input} secureTextEntry={secureTextEntry} ico />
           <Pressable onPress={() => setSecureTextEntry(!secureTextEntry)}>
             <FontAwesome name={secureTextEntry ? 'eye' : 'eye-slash'} size={20} style={{ paddingRight: 20 }} />
           </Pressable>

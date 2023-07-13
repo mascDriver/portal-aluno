@@ -1,11 +1,28 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Updates from 'expo-updates';
+import Notification from '../../components/Notification';
 
 export default function Welcome() {
     const navigation = useNavigation()
+    const fetchUpdate = async () => {
+        try {
+            const update = await Updates.checkForUpdateAsync();
+
+            if (update.isAvailable) {
+                await Updates.fetchUpdateAsync();
+                await Updates.reloadAsync();
+            }
+        } catch (error) {
+            // You can also add an alert() to see the error message in case of an error when fetching updates.
+        }
+    }
+    React.useEffect(() => {
+        fetchUpdate();
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -21,6 +38,7 @@ export default function Welcome() {
                 animation='fadeInUp'
                 delay={600}
             >
+                <Notification />
                 <Text style={styles.title}>Portal do Aluno UFFS.</Text>
                 <Text style={styles.text}>Faça o login para começar</Text>
                 <TouchableOpacity style={styles.button} onPress={async () => await AsyncStorage.getItem('session') ? navigation.navigate('Home') : navigation.navigate('SignIn')}>

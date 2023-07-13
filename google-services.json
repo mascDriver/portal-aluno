@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "597867436994",
+    "project_id": "portal-aluno-294a2",
+    "storage_bucket": "portal-aluno-294a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597867436994:android:0ad5067859f3696838d45b",
+        "android_client_info": {
+          "package_name": "com.mascdriver.portalaluno"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv4TnJQtrGEJvqEPmItiV8D8UlMgLPUek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
